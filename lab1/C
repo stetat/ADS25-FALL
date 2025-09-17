@@ -1,0 +1,49 @@
+#include <iostream>
+#include <stack>
+
+using namespace std;
+
+int main() {
+    stack<char> w1;
+    string f1, f2;
+    char c;
+    
+    while(true) {
+        cin.get(c);
+        
+        if (c == '\n') {
+            while(!w1.empty()) {
+                f2 += w1.top();
+                w1.pop();
+            }
+            break;
+        }
+        
+        if (c == '#') {
+            w1.pop();
+        }
+        
+        else {
+            w1.push(c);
+        }
+        
+        if (c == ' ') {
+            w1.pop();
+            while(!w1.empty()) {
+                f1 += w1.top();
+                w1.pop();
+            }
+        }
+        
+        
+        
+        
+    }
+    
+    if ( f1 == f2) cout<<"Yes"; 
+    else {
+        cout<<"No";
+    }
+    
+    
+}

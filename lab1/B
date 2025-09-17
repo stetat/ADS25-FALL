@@ -1,0 +1,55 @@
+#include <iostream>
+#include <stack>
+
+using namespace std;
+
+int main() {
+    int n, c;
+    stack<int> ages;
+    cin >> n;
+    int result[n];
+    result[0] = -1;
+    
+    for (int i = 0; i<n; i++) {
+        cin >> c;
+        
+        if ( i!=0 && c < ages.top()) {
+            while(true) {
+                ages.pop();
+                if (ages.empty()) {
+                    ages.push(c);
+                    result[i] = -1;
+                    break;
+                    
+                }
+                
+                if ( c >= ages.top() ) {
+                    result[i] = ages.top();
+                    ages.push(c);
+                    break;
+                }
+                
+            }
+        }
+        
+        else if (!ages.empty()) {
+            result[i] = ages.top();
+            ages.push(c);
+        }
+        
+        else if (i == 0) {
+            ages.push(c);
+        }
+        
+        
+    
+        
+    }
+    
+    for(int i = 0; i<n; i++) {
+        cout << result[i] << " ";
+    }
+   
+
+    return 0;
+}

@@ -1,0 +1,97 @@
+#include <iostream>
+#include <stack>
+#include <vector>
+#include <deque>
+#include <string>
+#include <cmath>
+
+using namespace std;
+
+
+
+
+
+int main() {
+    int n;
+    cin >> n;
+    deque<int> s;
+    deque<int> k;
+    vector<char> word;
+
+
+    char c;
+
+    for(int i = 0; i<n; i++) {
+        cin>>c;
+        word.push_back(c);
+
+        if (c == 'S') {
+            s.push_back(i);
+        }
+
+        else {
+            k.push_back(i);
+        }
+    }
+
+    
+    int holder;
+    while(true) {
+
+        if (s.empty()) {
+            cout << "KATSURAGI" << endl;
+            break;
+        }
+
+        if (k.empty()) {
+            cout << "SAKAYANAGI" << endl;
+            break;
+        }
+
+        if (s.front() < k.front()) {
+            k.pop_front();
+            holder = s.front();
+            s.pop_front();
+            s.push_back(holder+n);
+        }
+
+        else {
+            s.pop_front();
+            holder = k.front();
+            k.pop_front();
+            k.push_back(holder+n);
+
+        }
+
+
+        
+        
+        
+
+
+
+    }
+
+        
+
+
+    
+
+
+
+    
+
+    
+    
+    
+
+
+
+
+   
+    
+
+
+    return 0;
+
+}

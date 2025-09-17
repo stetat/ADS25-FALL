@@ -1,0 +1,57 @@
+#include <iostream>
+#include <stack>
+#include <vector>
+#include <deque>
+
+using namespace std;
+
+deque<int> flashroyal(int x) {
+    deque<int> result;
+
+    for(int i = x; i >= 1; i--) {
+        result.push_front(i);
+        for(int j = i; j > 0; j--) {
+            int niz = result.back();
+            result.pop_back();
+            result.push_front(niz);
+
+
+            
+        }
+    }
+
+    return result;
+}
+
+
+
+
+int main() {
+
+    int n, s;
+    cin >> n;
+
+    int sizes[n];
+
+    for(int i = 0; i<n; i++) {
+        cin >> s;
+        sizes[i] = s;
+    }
+
+    for(int i = 0; i<n; i++) {
+        deque<int> output = flashroyal(sizes[i]);
+
+        for(int i = 0; i<output.size(); i++) {
+            cout << output[i] << " ";
+        }
+        cout<< endl;
+    }
+
+
+   
+    
+
+
+    return 0;
+
+}

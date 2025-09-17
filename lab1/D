@@ -1,0 +1,39 @@
+#include <iostream>
+#include <stack>
+
+using namespace std;
+
+bool balancer(string a) {
+    stack<char> st;
+    for (int i = 0; i<a.size(); i++) {
+       if( i != 0 && !st.empty() && st.top() == a[i]) {
+           st.pop();
+           
+       }
+       
+       else {
+       st.push(a[i]);
+       }
+   }
+   return st.empty();
+}
+
+int main(){
+  
+   string a;
+   cin >> a;
+  
+
+   if (balancer(a)) {
+   cout << "YES" << endl;
+
+   }
+   else {cout << "NO" << endl;
+       
+   }
+   
+
+
+
+return 0;
+}

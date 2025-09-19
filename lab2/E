@@ -1,0 +1,32 @@
+#include <iostream>
+#include <set>
+#include <stack>
+#include <deque>
+
+using namespace std;
+
+int main() {
+    deque<string> names;
+    int n;
+    string name;
+
+    cin >> n;
+
+    for (int i = 0; i<n; i++) {
+        cin >> name;
+        if (i == 0 || names.back() != name) {
+            names.push_back(name);
+        }
+    }
+
+    cout << "All in all: " << names.size() << endl << "Students:" << endl;
+
+    while(!names.empty()) {
+        cout << names.back() << endl;
+        names.pop_back();
+    }
+    
+
+
+
+}

@@ -1,0 +1,117 @@
+#include <iostream>
+
+using namespace std;
+
+class Node {
+    public:
+    int data;
+    Node *next;
+
+    Node(int data) {
+        this->data = data;
+        this->next = NULL;
+    }
+};
+
+class linked_list {
+    public:
+    Node *front;
+    int sz;
+
+    linked_list() {
+        front = NULL;
+        sz = 0;
+    }
+
+    void push(int data) {
+        Node *n = new Node(data);
+        if ( sz == 0 ) {
+            front = n;
+            sz++;
+            return;
+        }
+
+        Node *cur = front;
+        while(cur->next) {
+            cur = cur->next;
+        }
+
+        cur->next = n;
+        sz++;
+    }
+
+    void pop() {
+        front = front->next;
+        sz--;
+    }
+
+    bool empty() {
+        return sz == 0;
+    }
+
+    void insert(int k, int data) {
+
+
+        Node *n = new Node(data);
+
+        if( sz == 0 ) {
+            front = n;
+            sz++;
+            return;
+        }
+
+        if ( k == 0 ) {
+            n->next = front;
+            front = n;
+            sz++;
+            return;
+        }
+        
+
+        else {
+
+        Node *new_pos = front;
+        for(int i = 1; i<k; i++) {
+            new_pos = new_pos->next;
+        }
+
+        
+        Node *temp = new_pos->next;
+        new_pos->next = n;
+        n->next = temp;
+        sz++;
+        }
+
+    }
+
+     Node* solution(int k, int data) {
+        insert(k, data);
+        return front; 
+    }
+
+
+
+};
+
+int main() {
+    int n, k, pos, el;
+    linked_list task;
+    cin >> n;
+    for(int i = 0; i<n; i++) {
+        cin >> k;
+        task.push(k);
+    }
+    cin >> el >> pos;
+
+    task.insert(pos, el);
+
+    while(!task.empty()) {
+        cout << task.front->data << " ";
+        task.pop();
+    }
+
+   
+   
+
+
+}

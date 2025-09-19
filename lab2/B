@@ -1,0 +1,103 @@
+#include <iostream>
+
+using namespace std;
+
+class Node {
+    public:
+    string data;
+    Node *prev;
+    Node *next;
+
+    Node(string data) {
+        this->data = data;
+        this->prev = NULL;
+        this->next = NULL;
+    }
+
+};
+
+class linked_list {
+    public:
+    Node *back;
+    Node *front;
+    int sz = 0;
+
+    linked_list() {
+        back = NULL;
+        front = NULL;
+    }
+
+    void push_back(string data) {
+        Node *newNode = new Node(data);
+        newNode->prev = back;
+        if (back) back->next = newNode;
+        back = newNode;
+        if (sz == 0) front = newNode;
+        sz++;
+    }
+
+    void push_front(string data) {
+        Node *newNode = new Node(data);
+        newNode->next = front;
+        if (front) front->prev = newNode;
+        front = newNode;
+        if (sz == 0) back = newNode;
+        sz++;
+    }
+
+    void pop_front() {
+        front = front->next;
+        sz--;
+    }
+
+    
+
+    string pop_back() {
+        if( sz !=0 ) {
+        string temp = back->data;
+
+        
+        back = back->prev;
+        sz--;
+        
+
+        return temp;
+        }
+    }
+
+    bool empty() {
+        return sz == 0;
+    }
+
+};
+
+void shift(linked_list& abc, int x) {
+    for(int i = 0; i<x; i++) {
+        string temp1 = abc.pop_back();
+        abc.push_front(temp1);
+    }
+}
+
+
+int main() {
+    int n, k;
+    linked_list poem;
+    string word;
+    cin >> n >> k;
+
+    for(int i = 0; i<n; i++) {
+        cin >> word;
+        poem.push_back(word);
+    }
+
+    shift(poem, n-k);
+
+    while(!poem.empty()) {
+        cout<<poem.front->data<<" ";
+        poem.pop_front();
+
+    }
+
+
+
+}

@@ -1,0 +1,144 @@
+#include <iostream>
+
+using namespace std;
+
+class Node {
+    public:
+    int data;
+    Node *next;
+
+    Node(int data) {
+        this->data = data;
+        this->next = NULL;
+    }
+};
+
+class linked_list {
+    public:
+    int sz;
+    Node *front;
+    Node *back;
+
+    linked_list() {
+        sz = 0;
+        front = NULL;
+    }
+
+    void push_back(int data) {
+        Node *n = new Node(data);
+        if ( sz == 0 ) {
+            front = back = n;
+            
+        }
+        
+        else {
+            back->next = n;
+            back = n;
+            
+
+
+            
+        }
+        sz++;
+
+    }
+
+    bool empty() {
+        return sz == 0;
+    }
+
+    void clear() {
+        if( sz != 0) {
+      
+        while(front) {
+            Node *temp = front;
+            front = front->next;
+            delete temp;
+         
+        }
+        
+        sz = 0;
+        }
+    }
+
+    void pop_front() {
+        if(sz != 0) {
+            front = front->next;
+            sz--;
+        }
+    }
+    
+
+
+
+};
+
+int main() {
+    
+    int n,k;
+    char c;
+    linked_list letters;
+    linked_list result;
+
+    cin >> n;
+
+    int cycles[n];
+
+    for(int i = 0; i<n; i++) {
+        int arr[26] = {0};
+        cin >> k;
+        cycles[i] = k;
+        for(int j = 0; j<k; j++) {
+            cin >> c;
+            letters.push_back(int(c));
+            arr[int(c) - 97]++;
+
+            if (arr[letters.front->data - 97] == 1) {
+                result.push_back(int(letters.front->data));
+
+            }
+
+            else {
+                while(true) {
+                    letters.pop_front();
+
+                    if(letters.empty()) {
+                        result.push_back(-1);
+                        break;
+                    }
+
+                    if(arr[letters.front->data - 97] == 1) {
+                        result.push_back(letters.front->data);
+                        break;
+                    }
+
+
+                }
+            }
+
+        }
+        letters.clear();
+        
+    }
+
+
+    for(int i = 0; i<n; i++) {
+        for(int j = 0; j<cycles[i]; j++) {
+           
+                if ( result.front->data == -1) {
+                    cout<<-1<< " ";
+                    result.pop_front();
+                }
+                else {
+                    cout << char(result.front->data) << " ";
+                    result.pop_front();
+                }
+
+            
+        }
+        cout<<endl;
+    }
+
+    
+
+}

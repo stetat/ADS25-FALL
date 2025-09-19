@@ -1,0 +1,46 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+int distance(int a, int b) {
+    return abs(a - b);
+}
+
+
+int main() {
+    int d, d1, offset = 0, n, k, c;
+    cin >> n;
+    int a[n];
+
+    for(int i = 0; i < n; i++) {
+        cin >> c;
+        a[i] = c;
+    }
+
+    cin >> k;
+
+    d1 = distance(k, a[0]);
+
+
+    for(int i = 1; i < n; i++) {
+        d = distance(k, a[i]);
+
+        if (d < d1) {
+            offset = i;
+            d1 = d;
+           
+        }
+
+       
+
+
+    }
+
+    cout << offset << endl;
+
+
+
+
+
+
+}

@@ -1,0 +1,185 @@
+#include <iostream>
+
+using namespace std;
+
+class Node {
+    public:
+    string data;
+    Node *prev;
+    Node *next;
+
+    Node(string data) {
+        this->data = data;
+        this->prev = NULL;
+        this->next = NULL;
+    }
+
+};
+
+class double_list {
+    public:
+    int sz;
+    Node *front;
+    Node *back;
+
+    double_list() {
+        sz = 0;
+        front = NULL;
+        back = NULL;
+    }
+
+    bool empty() {
+        return sz == 0;
+    }
+
+    string add_front(string data) {
+        Node *n = new Node(data);
+        n->next = front;
+        if( front ) front->prev = n;
+        front = n;
+        if(sz == 0) back = n;
+        sz++;
+
+        return "ok";
+
+    }
+
+    string add_back(string data) {
+        Node *n = new Node(data);
+        n->prev = back;
+        if(back) back->next = n;
+        back = n;
+        if(sz == 0) front = n;
+        sz++;
+
+        return "ok";
+    }
+
+    string erase_front() {
+        if ( sz != 0) {
+            string name = front->data;
+            
+            front = front->next;
+            //front->prev = NULL;
+            sz--;
+
+            return name;
+        }
+
+        return "error";
+    }
+
+    string erase_back() {
+        if (sz != 0 ) {
+            string name = back->data;
+            back = back->prev;
+            back->next = NULL;
+            sz--;
+
+            return name;
+        }
+        return "error";
+    }
+
+    string get_front() {
+        if(sz != 0) {
+            return front->data;
+        }
+
+        return "error";
+    }
+
+    string get_back() {
+        if(sz != 0) {
+            return back->data;
+        }
+
+        return "error";
+    }
+
+    
+
+    string clear() {
+        
+
+        if (sz != 0) {
+            Node *cur = front;
+            while( cur->next ) {
+                cur = cur->next;
+            }
+        
+            cur = NULL;
+            sz = 0;
+        }
+        return "ok";
+
+    }
+
+
+};
+
+
+int main() {
+    string command, word;
+    double_list books, result;
+
+    while(true) {
+        cin >> command;
+
+        if(command == "add_front") {
+            cin >> word;
+            result.add_back(books.add_front(word));
+            continue;
+        }
+
+        if(command == "add_back") {
+            cin >> word;
+            result.add_back(books.add_back(word));
+            continue;
+        }
+
+        if(command == "erase_front") {
+            
+            result.add_back(books.erase_front());
+            continue;
+        }
+
+        if(command == "erase_back") {
+            
+            result.add_back(books.erase_back());
+            continue;
+        }
+
+        if(command == "front") {
+            result.add_back(books.get_front());
+            continue;
+
+        }
+
+        if(command == "back") {
+            result.add_back(books.get_back());
+            continue;
+        }
+
+        if(command == "clear") {
+            result.add_back(books.clear());
+            continue;
+        }
+
+        if(command == "exit") {
+            result.add_back("goodbye");
+            break;
+        }
+
+
+
+    }
+
+    while(!result.empty()) {
+        cout << result.front->data << endl;
+        result.erase_front();
+    }
+
+
+
+}

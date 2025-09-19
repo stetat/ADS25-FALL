@@ -1,0 +1,210 @@
+#include <iostream>
+ 
+using namespace std;
+ 
+class Node {
+    public:
+    int data;
+    int index;
+    int count;
+    Node *next;
+    Node(int data) {
+        this->data = data;
+        this->count = 0;
+        this->next = NULL;
+        this->index = -1;
+    }
+};
+ 
+class Map {
+    public:
+    Node *front;
+    Node *back;
+    int sz;
+    int mode;
+    
+
+    Map() {
+        sz = 0;
+        front = NULL;
+        back = NULL;
+        mode = 0;
+       
+    }
+
+    bool exists(int data) {
+        Node *cur = front;
+        while(cur) {
+            if (cur->data == data) {
+                return true;
+        }
+        cur = cur->next;
+        }
+        return false;
+    }
+
+    void push(int data) {
+
+        if ( sz == 0) {
+            Node *n = new Node(data);
+            front = back = n;
+            n->count++;
+            n->index = 0;
+            if (n->count > mode) {
+                mode = n->count;
+            }
+            sz++;
+            return;
+        }
+
+        if(!exists(data)) {
+            Node *n = new Node(data);
+            Node *cur = front;
+            n->count++;
+            
+            if (n->count > mode) {
+                mode = n->count;
+            }
+
+            n->next = front;
+            sz++;
+            n->index = sz-1;
+            front = n;
+            
+        }
+        
+        else {
+            
+            Node *cur = front;
+            while(cur) {
+                if (cur->data == data) {
+                    cur->count++;
+                    if (cur->count > mode) {
+                        mode = cur->count;
+                    }
+                    return;
+                }
+                cur = cur->next;
+            }
+        }
+    }
+
+    int mode_amount() {
+        Node *cur = front;
+        int mamount = 0;
+
+        while (cur) {
+            if (cur->count == mode) {
+                mamount++;
+            }
+            cur = cur->next;
+        }
+
+        return mamount;
+    }
+
+
+    
+
+    
+
+
+
+    
+
+   
+
+    int at(int data) {
+        Node *cur = front;
+
+        while(cur) {
+            if(cur->index == data) {
+                return cur->data;
+            }
+            cur = cur->next;
+        }
+    }
+
+
+
+
+
+
+    int count(int data) {
+
+        Node *cur = front;
+        while(cur) {
+                if (cur->data == data) {
+                    return cur->count;
+                }
+                cur = cur->next;
+            }
+        return 0;
+    }
+
+    int size() {
+        return sz;
+    }
+
+    bool empty() {
+        return sz == 0;
+    }
+
+    void pop_front() {
+        front = front->next;
+        sz--;
+    }
+
+
+};
+ 
+int main() {
+    int n, c;
+    cin >> n;
+    Map elements;
+
+    for(int i = 0; i < n; i++) {
+        cin >> c;
+
+        elements.push(c);
+
+    }
+
+    int modes[elements.mode_amount()];
+    
+    int real_m = elements.mode_amount();
+
+    for(int i = 0; i<real_m; i++) {
+
+        while(!elements.empty()) {
+
+            if (elements.front->count == elements.mode) {
+                modes[i] = elements.front->data;
+                elements.pop_front();
+                break;
+            }
+
+            elements.pop_front();
+        }
+    }
+
+    for(int i = 0; i<real_m; i++) {
+        for(int j = i+1; j<real_m; j++) {
+            if(modes[i] < modes[j]) {
+                int temp = modes[j];
+                modes[j] = modes[i];
+                modes[i] = temp;
+            }
+        }
+    }
+
+    for(int i = 0; i<real_m; i++) {
+        cout<<modes[i]<< " ";
+    }
+    
+
+
+    
+
+    return 0;
+}

@@ -1,6 +1,16 @@
 {
     "files.associations": {
         "a": "cpp",
-        "vector": "cpp"
+        "vector": "cpp",
+        "k": "cpp",
+        "h": "cpp",
+        "b": "cpp",
+        "c": "cpp",
+        "d": "cpp",
+        "f": "cpp",
+        "i": "cpp",
+        "l": "cpp",
+        "new": "cpp",
+        "iostream": "cpp"
     }
 }

@@ -1,15 +1,15 @@
 #include <iostream>
 #include <cmath>
-
+#define LL long long
 using namespace std;
 
 
-double h;
-double arr[10005];
+LL h;
+double arr[100005];
 double n;
 
 bool steals(double x) {
-    double hours = 0;
+    LL hours = 0;
     for(int i = 0; i<n; i++) {
         hours += ceil(arr[i]/x);
 
@@ -25,7 +25,8 @@ bool steals(double x) {
 
 int main() {
    
-    double x, max_speed = 0, min_speed;
+    long long x, max_speed = 0;
+    double min_speed;
     cin >> n >> h;
 
     for(int i = 0; i<n; i++) {
@@ -34,7 +35,7 @@ int main() {
         arr[i] = x;
     }
 
-    double l = 0, r = max_speed, mid;
+    LL l = 1, r = max_speed, mid;
 
     while(l <= r) {
         mid = (l+r)/2;
@@ -52,7 +53,7 @@ int main() {
     }
 
    
-    cout << min_speed << endl;
+    cout << (min_speed) << endl;
 
      
 

@@ -19,7 +19,6 @@ bool steal(double x) {
 
     }
 
-    
 
     return true;
 
@@ -33,7 +32,7 @@ int main() {
 
     for(int i = 0; i<n; i++) {
         cin >> x;
-        max_speed += x;
+        max_speed = max(max_speed, x);
         bags[i] = x;
 
     }
